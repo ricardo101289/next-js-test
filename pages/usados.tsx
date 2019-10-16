@@ -1,32 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { withRedux } from '../lib/redux'
-import useInterval from '../lib/useInterval'
-import Clock from '../src/Used/components/Clock'
+import VehicleCard from '../src/Used/components/VehicleCard'
+import {withApollo} from '../lib/apollo'
+import { useRouter } from 'next/router';
+
+export const config = { amp: true };
 
 const IndexPage = () => {
-    const dispatch = useDispatch();
-    useInterval(() => {
-        dispatch({
-            type: 'TICK',
-            light: true,
-            lastUpdate: Date.now()
-        })
-    }, 1000);
-    return (
-        <>
-            <Clock />
-        </>
-    )
-}
-
-IndexPage.getInitialProps = ({ reduxStore: {dispatch} }) => {
-    dispatch({
-        type: 'TICK',
-        light: typeof window === 'object',
-        lastUpdate: Date.now()
-    });
-    return {}
+    const router = useRouter();
+    return <VehicleCard query={router.query}/>;
 };
 
-export default withRedux(IndexPage)
+export default withApollo(IndexPage)
