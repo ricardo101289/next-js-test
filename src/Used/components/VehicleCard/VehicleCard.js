@@ -1,13 +1,14 @@
 import React from 'react'
 import { useVehicleCard } from './VehicleCardContainer';
+import { Card } from "./VehicleCardStyle";
 
 
 const VehicleCard = ({query}) => {
     const {error, data} = useVehicleCard(query.brand);
-    return error ? null : data.map( vehicle =>
-        <div className="vehicle-used-item TOP NEGOTIABLE full-item">
+    return error ? null : data.map( (vehicle, index) =>
+        <div key={index} className="vehicle-used-item full-item">
             <div className="vehicle-container">
-                <div className="card">
+                <Card>
                     <div className="card-image">
                         <a className="vehicle-href" href="/vehicle/autos-hyundai-sonata-quito-2011/1151835"
                            title="Hyundai Sonata 2011">
@@ -32,7 +33,7 @@ const VehicleCard = ({query}) => {
                             <span className="left share-value">$ {vehicle.price}</span>
                         </strong>
                     </div>
-                </div>
+                </Card>
             </div>
         </div>
     );
