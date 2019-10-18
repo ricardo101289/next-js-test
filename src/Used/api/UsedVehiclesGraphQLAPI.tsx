@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_VEHICLES = gql`
     {
-        vehiclesConnection {
+        vehiclesConnection(first: 100) {
             edges {
                 node {
                     status
