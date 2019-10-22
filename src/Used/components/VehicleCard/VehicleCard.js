@@ -1,12 +1,13 @@
 import React from 'react'
 import { useVehicleCard } from './VehicleCardContainer';
 import { Card } from "./VehicleCardStyle";
-
+import styled from 'styled-components/macro';
+import tw from 'tailwind.macro';
 
 const VehicleCard = ({query}) => {
     const {error, data} = useVehicleCard(query.brand);
     return error ? null : data.map( (vehicle, index) =>
-        <div key={index} className="vehicle-used-item full-item">
+        <div key={index} css={tw`inline-block text-gray-700 text-center bg-gray-400 px-4 py-2 m-2`}>
             <div className="vehicle-container">
                 <Card>
                     <div className="card-image">
