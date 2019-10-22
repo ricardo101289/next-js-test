@@ -4,7 +4,7 @@ module.exports = (app, server) => {
     app.render(req, res, actualPage);
   });
   server.get('/', (req, res) => {
-    const actualPage = '/usados';
+    const actualPage = '/index';
     app.render(req, res, actualPage);
   });
   server.get('/usados/:brand', (req, res) => {

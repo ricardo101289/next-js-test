@@ -1,34 +1,18 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { withRedux } from '../lib/redux'
-import useInterval from '../lib/useInterval'
-import Counter from '../src/Used/components/Counter'
+import VehicleCard from '../src/Used/components/VehicleCard'
+import Layout from "../src/Used/components/Layout/Layout";
+import {useRouter} from 'next/router'
+import {withApollo} from '../lib/apollo'
 
+export const config = {amp: true};
 const IndexPage = () => {
-  // Tick the time every second
-  const dispatch = useDispatch()
-  useInterval(() => {
-    dispatch({
-      type: 'TICK',
-      light: true,
-      lastUpdate: Date.now()
-    })
-  }, 1000);
+  const router = useRouter();
   return (
-    <>
-      <Counter />
-    </>
+<Layout title="APP | USADOS"><VehicleCard query={router.query}/>;</Layout>
   )
 };
 
-IndexPage.getInitialProps = ({ reduxStore: {dispatch} }) => {
-  dispatch({
-    type: 'TICK',
-    light: typeof window === 'object',
-    lastUpdate: Date.now()
-  });
-
+IndexPage.getInitialProps = () => {
   return {}
 };
 
-export default withRedux(IndexPage)
+export default withApollo(IndexPage)
